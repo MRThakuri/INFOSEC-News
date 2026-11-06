@@ -1,2 +1,55 @@
 # INFOSEC-News
-It collects cybersecurity news online and provides summary report
+
+Collect cybersecurity news published in the last 24 hours and share articles
+that mention CVEs rated High or Critical by NVD (CVSS 7.0 or higher).
+
+## Setup
+
+Requires Python 3.10 or newer.
+
+```sh
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Run a preview (the default; this does not send anything):
+
+```sh
+python infosec_news.py
+```
+
+The default RSS sources are SecurityWeek, Dark Reading, The Hacker News, and
+CISA Cybersecurity Advisories. Set `NEWS_FEEDS` to a comma-separated list of
+feed URLs to replace them. Use `--hours 12` to change the lookback window.
+
+## Sharing
+
+Configure one or both delivery methods with environment variables. Email can
+target multiple recipients or a distribution list. A Slack incoming webhook
+can post to a channel (or a group that includes that channel).
+
+Email settings:
+
+- `SMTP_HOST` (required to enable email)
+- `SMTP_PORT` (default: `587`; port `465` uses implicit TLS)
+- `SMTP_USER` and `SMTP_PASSWORD` (optional if the SMTP server does not require authentication)
+- `EMAIL_FROM` (defaults to `SMTP_USER`)
+- `EMAIL_TO` (comma-separated addresses)
+
+Slack setting:
+
+- `SLACK_WEBHOOK_URL`
+
+To deliver the report, pass `--send`:
+
+```sh
+python infosec_news.py --send
+```
+
+The collector only shares entries that include a CVE identifier with an NVD
+CVSS base score of at least 7.0. Articles without a matching score are omitted,
+not assigned a severity based on wording. NVD lookups require internet access;
+set `NVD_API_KEY` to use an API key and raise the public rate limit. The script
+does not schedule itself; run it from cron or another scheduler for recurring
+digests. Review a preview before enabling scheduled delivery.
