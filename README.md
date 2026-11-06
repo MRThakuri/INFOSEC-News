@@ -19,9 +19,10 @@ Run a preview (the default; this does not send anything):
 python infosec_news.py
 ```
 
-The default RSS sources are SecurityWeek, Dark Reading, The Hacker News, and
-CISA Cybersecurity Advisories. Set `NEWS_FEEDS` to a comma-separated list of
-feed URLs to replace them. Use `--hours 12` to change the lookback window.
+The default RSS sources are SecurityWeek, Dark Reading, The Hacker News, CISA
+Cybersecurity Advisories, and NIST Cybersecurity News. Set `NEWS_FEEDS` to a
+comma-separated list of feed URLs to replace them. Use `--hours 12` to change
+the lookback window.
 
 ## Sharing
 

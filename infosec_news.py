@@ -19,6 +19,7 @@ DEFAULT_FEEDS = (
     "https://www.darkreading.com/rss.xml",
     "https://feeds.feedburner.com/TheHackersNews",
     "https://www.cisa.gov/cybersecurity-advisories/all.xml",
+    "https://www.nist.gov/news-events/cybersecurity/rss.xml",
 )
 CVE_PATTERN = re.compile(r"CVE-\d{4}-\d{4,}", re.IGNORECASE)
 NVD_URL = "https://services.nvd.nist.gov/rest/json/cves/2.0"
